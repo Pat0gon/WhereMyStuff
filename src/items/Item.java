@@ -1,6 +1,6 @@
 package items;
 
-public class Item extends {
+public class Item{
     private final String NAME;
     private final String DESCRIPTION;
     private ItemQuantityType quantityType;
@@ -8,34 +8,34 @@ public class Item extends {
     private float amount = 0;
     private float price = 0;
     
-    public Item(String NAME, String dESCRIPTION, ItemQuantityType quantityType, short quantity) {
+    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, short quantity) {
 
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
+        this.NAME = NAME;
+        this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
         this.quantity = quantity;
 
     }
 
     
-    public Item(String NAME, String dESCRIPTION, ItemQuantityType quantityType, float amount) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
+    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float amount) {
+        this.NAME = NAME;
+        this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
         this.amount = amount;
     }
 
-    public Item(String NAME, String dESCRIPTION, ItemQuantityType quantityType, float amount, float price) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
+    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float amount, float price) {
+        this.NAME = NAME;
+        this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
         this.amount = amount;
         this.price = price;
     }
 
-    public Item(String NAME, String dESCRIPTION, ItemQuantityType quantityType, short quantity, float price) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
+    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, short quantity, float price) {
+        this.NAME = NAME;
+        this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
         this.quantity = quantity;
         this.price = price;

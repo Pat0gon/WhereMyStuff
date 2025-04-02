@@ -1,6 +1,6 @@
 package items;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Consumable extends Item {
     private final String NAME;
@@ -9,41 +9,23 @@ public class Consumable extends Item {
     private short quantity = 0;
     private float amount = 0;
     private float price = 0;
-    private Date storeDate;
-    private Date expirationDate;
+    private LocalDate storeDate;
+    private final LocalDate expirationDate;
     private boolean isExpired = false;
 
 
-    public Consumable(String NAME, String dESCRIPTION, ItemQuantityType quantityType, short quantity, Date expirationDate) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
-        this.quantityType = quantityType;
-        this.quantity = quantity;
-        this.storeDate = new Date().today();
+    public Consumable(String NAME, String DESCRIPTION, ItemQuantityType quantityType, short quantity, Date expirationDate) {
+        super(NAME, DESCRIPTION, quantityType, quantity);
+        this.storeDate = LocalDate().now();
 
     }
 
     
-    public Consumable(String NAME, String dESCRIPTION, ItemQuantityType quantityType, float amount) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
-        this.quantityType = quantityType;
+    public Consumable(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float amount) {
+        
+        super(NAME, DESCRIPTION, quantityType, amount);
         this.amount = amount;
     }
 
-    public Consumable(String NAME, String dESCRIPTION, ItemQuantityType quantityType, float amount, float price) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
-        this.quantityType = quantityType;
-        this.amount = amount;
-        this.price = price;
-    }
-
-    public Consumable(String NAME, String dESCRIPTION, ItemQuantityType quantityType, short quantity, float price) {
-        NAME = nAME;
-        DESCRIPTION = dESCRIPTION;
-        this.quantityType = quantityType;
-        this.quantity = quantity;
-        this.price = price;
-    }
+    
 }
