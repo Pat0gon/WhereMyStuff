@@ -1,5 +1,6 @@
 package items;
 
+import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Queue;
 
@@ -11,7 +12,7 @@ public class Items{
     }
 
     public void addItem(Consumable item, Queue<String> itemTypes){
-        ArrayList<ItemType> branches = node.getBranches();
+        LinkedList<ItemType> branches = node.getItemTypes();
         while(!itemTypes.isEmpty()){
             if(branches.contains(new ItemType(itemTypes.peek()))){
                 for(ItemType branch : branches){
@@ -32,7 +33,7 @@ public class Items{
     }
 
     public void addItem(Unconsumable item, Queue<String> itemTypes){
-        ArrayList<ItemType> branches = node.getBranches();
+        LinkedList<ItemType> branches = node.getItemTypes();
         while(!itemTypes.isEmpty()){
             if(branches.contains(new ItemType(itemTypes.peek()))){
                 for(ItemType branch : branches){
@@ -52,10 +53,20 @@ public class Items{
         node.addItem(item);
     }
 
+    public void checkExpiration(){
+        LinkedList<ItemType> branches = node.getItemTypes();
+        for(ItemType branch : branches){
+            ArrayList<Item> items = branch.getItems();
+            for(Item item : items){
+                if(item instanceof Consumable consumable){
+                    consumable.checkExpiration();
+                }
+            }
+        }
+    }
+
     
 
 
-    public void addItemType(ItemType type){
-        
-    }
+    
 }
