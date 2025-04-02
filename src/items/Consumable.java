@@ -28,10 +28,9 @@ public class Consumable extends Item {
         if(getQuantity() <= consumedQuantity){
             return true;
         } else {
-            setQuantity(getQuantity()-consumedQuantity);
+            setQuantity(0);
             return false;
         }
-            
     }
 
 

@@ -6,9 +6,7 @@ import java.util.LinkedList;
 public class ItemType {
     private String name;  
     private ItemType parent;
-    @SuppressWarnings("FieldMayBeFinal")
     private LinkedList<ItemType> itemTypes = new LinkedList<>();
-    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Item> items = new ArrayList<>();
 
     public ItemType(String name){
@@ -30,7 +28,7 @@ public class ItemType {
         return itemTypes;
     }
 
-    public ArrayList getItems(){
+    public ArrayList<Item> getItems(){
         return items;
     }
 
@@ -47,24 +45,47 @@ public class ItemType {
         items.add(item);
         
     }
-    public void consumeItem(String itemName){
-        for (Item item : items) {
-            if (item.getNAME().equals(itemName)) {
-                items.remove(item);
-                break;
-            }
-        }    
-    }
-
-    public void consumeItem(String itemName, float quantity) {
-        for (Item item : items) {
-            if (item.getNAME().equals(itemName)) {
-                if (item instanceof Consumable consumable) {
-                    consumable.checkExpiration();
+    
+    public void consumeItem(String itemName, float quantity){
+        for(Item item : items){
+            if(item.getNAME().equals(itemName)){
+                if(item instanceof Consumable itemC){
+                    if(itemC.consume(quantity)){
+                        items.remove(item);
+                    }
                 }
-                
-                break;
             }
         }
+    }
+    public Item removeItem(String itemName){
+        for(Item item : items){
+            if(item.getNAME().equals(itemName)){
+                items.remove(item);
+                return (Item) item;
+            }
+            }
+        return new Item("","",null,0); // Return an empty item if not found
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    public ItemType getParent() {
+        return parent;
+    }
+
+
+
+    public void setItemTypes(LinkedList<ItemType> itemTypes) {
+        this.itemTypes = itemTypes;
+    }
+
+
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 }

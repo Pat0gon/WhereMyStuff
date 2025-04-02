@@ -7,7 +7,7 @@ public class Unconsumable extends Item {
     private float quantity = 0;
     private float price = 0;
 
-    public Unconsumable(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity) {
+    public Unconsumable(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity){
         super(NAME, DESCRIPTION, quantityType, quantity);
         this.NAME = NAME;
         this.DESCRIPTION = DESCRIPTION;

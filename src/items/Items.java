@@ -11,6 +11,12 @@ public class Items{
         this.node = new ItemType("root");
     }
 
+    void returnToRoot(){
+        while(node.getName() != "root"){
+            node = node.getParent();
+        }
+    }
+
     public void addItem(Consumable item, Queue<String> itemTypes){
         LinkedList<ItemType> branches = node.getItemTypes();
         while(!itemTypes.isEmpty()){
@@ -30,6 +36,7 @@ public class Items{
             }
         }
         node.addItem(item);
+        returnToRoot();
     }
 
     public void addItem(Unconsumable item, Queue<String> itemTypes){
@@ -51,6 +58,35 @@ public class Items{
             }
         }
         node.addItem(item);
+        returnToRoot();
+    }
+    
+    public Item findItem(String itemName) {
+        LinkedList<ItemType> branches = node.getItemTypes();
+        for(ItemType branch : branches){
+            ArrayList<Item> items = branch.getItems();
+            for(Item item : items){
+                if(item.getNAME().equals(itemName)){
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean consumeItem(String itemName, float quantity) {
+        LinkedList<ItemType> branches = node.getItemTypes();
+        for(ItemType branch : branches){
+            ArrayList<Item> items = branch.getItems();
+            for(Item item : items){
+                if(item.getNAME().equals(itemName)){
+                    if(item instanceof Consumable consumable){
+                        return consumable.consume(quantity);
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public void checkExpiration(){
@@ -64,6 +100,8 @@ public class Items{
             }
         }
     }
+
+    
 
     
 
