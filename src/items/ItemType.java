@@ -1,12 +1,15 @@
-package items;
+package Items;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
+
+import javax.lang.model.type.ArrayType;
 
 public class ItemType {
     private String name;  
     private ItemType parent;
-    private LinkedList<ItemType> itemTypes = new LinkedList<>();
+    private ArrayList<ItemType> itemTypes = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
 
     public ItemType(String name){
@@ -24,21 +27,31 @@ public class ItemType {
         this.parent = parent;
     }
 
-    public LinkedList<ItemType> getItemTypes() {
-        return itemTypes;
+    public ArrayList<ItemType> getItemTypes(){
+        return this.itemTypes;
     }
 
     public ArrayList<Item> getItems(){
-        return items;
+        return this.items;
     }
 
 
-    public void addBranch(ItemType itemType){
-        itemType.setParent(this);
-        itemTypes.add(itemType);
+    public void addBranch(ItemType itemType)throws ElementAlreadyExistsException{
+        if (itemTypes.contains(itemType)){
+                throw new ElementAlreadyExistsException("Item type already exists: " + itemType.getName());
+         }
+        else{  
+            itemType.setParent(this);
+            itemTypes.add(itemType);
+        }
+      
     }
 
-    public void addItem(Consumable item){
+    public void addItem(Item item, float quantity, String containerID) throws ElementAlreadyExistsException{
+        if(items.contains(item)){
+            int index = items.indexOf(item);
+            ( items.get(index)).setQuantity(containerID, ( items.get(index)).getQuantityInContainer(containerID) + quantity);
+        }
         items.add(item);
     }
     public void addItem(Unconsumable item){
@@ -46,25 +59,25 @@ public class ItemType {
         
     }
     
-    public void consumeItem(String itemName, float quantity){
+    public void consumeItem(String itemName, float quantity, String containerID) throws NoSuchElementException{
         for(Item item : items){
             if(item.getNAME().equals(itemName)){
                 if(item instanceof Consumable itemC){
-                    if(itemC.consume(quantity)){
+                    if(itemC.consume(quantity,containerID)){
                         items.remove(item);
                     }
                 }
             }
         }
     }
-    public Item removeItem(String itemName){
+    public Item removeItem (String itemName) throws NoSuchElementException{
         for(Item item : items){
             if(item.getNAME().equals(itemName)){
                 items.remove(item);
                 return (Item) item;
             }
-            }
-        return new Item("","",null,0); // Return an empty item if not found
+        }
+        throw new NoSuchElementException("Item not found: " + itemName);
     }
 
     public void setName(String name) {
@@ -79,13 +92,15 @@ public class ItemType {
 
 
 
-    public void setItemTypes(LinkedList<ItemType> itemTypes) {
-        this.itemTypes = itemTypes;
+    public void setItemTypes(ArrayList<ItemType> itemTypes) {
+       this.itemTypes = itemTypes;
     }
 
 
 
     public void setItems(ArrayList<Item> items) {
-        this.items = items;
+        this.items =  items;
     }
+
+    
 }

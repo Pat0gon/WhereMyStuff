@@ -1,7 +1,7 @@
-package items;
+package Items;
 
-import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class Items{
@@ -12,13 +12,13 @@ public class Items{
     }
 
     void returnToRoot(){
-        while(node.getName() != "root"){
+        while(node.getName().equals("root")){
             node = node.getParent();
         }
     }
 
-    public void addItem(Consumable item, Queue<String> itemTypes){
-        LinkedList<ItemType> branches = node.getItemTypes();
+    public void addItem(Consumable item, Queue<String> itemTypes, float quantity, String containerID){
+        ArrayList<ItemType> branches = node.getItemTypes();
         while(!itemTypes.isEmpty()){
             if(branches.contains(new ItemType(itemTypes.peek()))){
                 for(ItemType branch : branches){
@@ -35,12 +35,12 @@ public class Items{
                 node = branch;
             }
         }
-        node.addItem(item);
+        node.addItem(item, quantity, containerID);
         returnToRoot();
     }
 
-    public void addItem(Unconsumable item, Queue<String> itemTypes){
-        LinkedList<ItemType> branches = node.getItemTypes();
+    public void addItem(Unconsumable item, Queue<String> itemTypes, float quantity, String containerID){
+        ArrayList<ItemType> branches = node.getItemTypes();
         while(!itemTypes.isEmpty()){
             if(branches.contains(new ItemType(itemTypes.peek()))){
                 for(ItemType branch : branches){
@@ -57,12 +57,12 @@ public class Items{
                 node = branch;
             }
         }
-        node.addItem(item);
+        node.addItem(item, quantity, containerID);
         returnToRoot();
     }
     
     public Item findItem(String itemName) {
-        LinkedList<ItemType> branches = node.getItemTypes();
+        ArrayList<ItemType> branches = node.getItemTypes();
         for(ItemType branch : branches){
             ArrayList<Item> items = branch.getItems();
             for(Item item : items){
@@ -74,14 +74,14 @@ public class Items{
         return null;
     }
 
-    public boolean consumeItem(String itemName, float quantity) {
-        LinkedList<ItemType> branches = node.getItemTypes();
+    public boolean consumeItem(String itemName, float quantity, String containerID) {
+        ArrayList<ItemType> branches = node.getItemTypes();
         for(ItemType branch : branches){
             ArrayList<Item> items = branch.getItems();
             for(Item item : items){
                 if(item.getNAME().equals(itemName)){
                     if(item instanceof Consumable consumable){
-                        return consumable.consume(quantity);
+                        return consumable.consume(quantity, containerID);
                     }
                 }
             }
@@ -90,7 +90,7 @@ public class Items{
     }
 
     public void checkExpiration(){
-        LinkedList<ItemType> branches = node.getItemTypes();
+        ArrayList<ItemType> branches = node.getItemTypes();
         for(ItemType branch : branches){
             ArrayList<Item> items = branch.getItems();
             for(Item item : items){

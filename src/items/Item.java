@@ -1,19 +1,23 @@
-package items;
+package Items;
+import java.util.HashMap;
+
+import Storage.Container;
 
 public class Item{
     private final String NAME;
     private final String DESCRIPTION;
     private final ItemQuantityType quantityType;
-    private float quantity = 0;
     private float price = 0;
+    private HashMap<String, Float> containerQuantityMap = new HashMap<>();
+
     
-    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity) {
+    
+    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity, String containerID) {
 
         this.NAME = NAME;
         this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
-        this.quantity = quantity;
-
+        this.containerQuantityMap.put(containerID, quantity);
     }
 
 
@@ -28,13 +32,20 @@ public class Item{
         return quantityType;
     }
     
-    float getQuantity() {
-        return quantity;
+    float getQuantityInContainer(String containerKey) {
+        return containerQuantityMap.get(containerKey);
+     }
+    float getTotalQuantity(){
+        float TotalQuantity = 0;
+        for (String containerID : containerQuantityMap.keySet()) {
+            TotalQuantity += containerQuantityMap.get(containerID);
+        }
+        return TotalQuantity;
     }
 
-    void setQuantity(float quantity) {
-        this.quantity = quantity;
-    }
+    void setQuantity(String containerID, float quantity) {
+         this.containerQuantityMap.put(containerID, quantity);
+     }
     
     void setPrice(float price) {
         this.price = price;
@@ -43,4 +54,10 @@ public class Item{
     float getPrice() {
         return price;
     }
+
+    public HashMap<String, Float> getContainerQuantityMap() {
+        return containerQuantityMap;
+    }
+
+    
 } 
