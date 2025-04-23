@@ -8,7 +8,7 @@ public class Item{
     private final String DESCRIPTION;
     private final ItemQuantityType quantityType;
     private float price = 0;
-    private HashMap<String, Float> containerQuantityMap = new HashMap<>();
+    private HashMap<String, Float> containerQuantityMap = new HashMap<>();//containerID where item's stored and its quantity
 
     
     

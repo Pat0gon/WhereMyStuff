@@ -5,14 +5,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Items{
-    ItemType node;
+    private ItemType node;
 
     public Items(){
         this.node = new ItemType("root");
     }
 
     void returnToRoot(){
-        while(node.getName().equals("root")){
+        while(!node.getName().equals("root")){
             node = node.getParent();
         }
     }
