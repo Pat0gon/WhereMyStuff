@@ -1,16 +1,13 @@
 package Items;
 
-import java.util.HashMap;
-import javafx.util.Pair;
+import Storage.Container;
 
-public class Unconsumable  extends Item {
+public class Unconsumable extends Item {
     private final String NAME;
     private final String DESCRIPTION;
     private final ItemQuantityType quantityType;
-    private Pair<Short,Short> value;
-    private HashMap<String, Float> containerQuantityMap = new HashMap<>();
-
-
+    private float quantity = 0;
+    private float price = 0;
 
     public Unconsumable(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity, String containerID){
         super(NAME, DESCRIPTION, quantityType, quantity, containerID);
@@ -20,8 +17,6 @@ public class Unconsumable  extends Item {
         this.quantity = quantity;
         
     }
-
-
 
     
 

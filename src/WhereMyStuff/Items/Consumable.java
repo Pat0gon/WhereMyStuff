@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Consumable extends Item {
     private final String NAME;
-    private String description;
+    private final String DESCRIPTION;
     private final ItemQuantityType quantityType;
     private float price = 0;
     private LocalDate storeDate;
@@ -13,13 +13,13 @@ public class Consumable extends Item {
     private boolean isExpired = false;
 
 
-    public Consumable(String NAME, String description, ItemQuantityType quantityType, float quantity, String containerID, String expirationDate) {
-        super(NAME, description, quantityType, quantity, containerID);
+    public Consumable(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity, String containerID, String expirationDate) {
+        super(NAME, DESCRIPTION, quantityType, quantity, containerID);
         this.storeDate = LocalDate.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.expirationDate = LocalDate.parse(expirationDate, dtf);
         this.NAME = NAME;
-        this.description = description;
+        this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
     }
 

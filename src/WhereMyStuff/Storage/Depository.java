@@ -10,21 +10,21 @@ public class Depository{
 
     
 
-    public Depository(String name){
+    public Depository(String name, String ID){
         this.name = name;
-        this.ID = this.generateID();
+        this.ID = ID;
     }
 
-    public Depository(){
-        this.ID = this.generateID();
-        this.name = "Storage "+ this.ID;
+    public Depository( String ID){
+        this.name = "Magazyn "+ ID;
+        this.ID = ID;
     }
 
     private void addStorage(Storage storage){
         this.storageMap.put(storage.getNAME(), storage);
     }
 
-    private String generateID() {
-       ;
-    }
+    
+        
+    
 }

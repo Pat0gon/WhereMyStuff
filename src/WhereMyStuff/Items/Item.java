@@ -1,42 +1,35 @@
 package Items;
 import java.util.HashMap;
 
+import Storage.Container;
+
 public class Item{
     private final String NAME;
-    private String description;
+    private final String DESCRIPTION;
     private final ItemQuantityType quantityType;
-    private float value = 0;
+    private float price = 0;
     private HashMap<String, Float> containerQuantityMap = new HashMap<>();//containerID where item's stored and its quantity
 
     
     
-    public Item(String NAME, String description, ItemQuantityType quantityType,float value, float quantity, String containerID) {
+    public Item(String NAME, String DESCRIPTION, ItemQuantityType quantityType, float quantity, String containerID) {
 
         this.NAME = NAME;
-        this.description = description;
-        this.quantityType = quantityType;
-        this.value = value;
-        this.containerQuantityMap.put(containerID, quantity);
-    }
-
-    public Item(String NAME, String description, ItemQuantityType quantityType, float quantity, String containerID) {
-
-        this.NAME = NAME;
-        this.description = description;
+        this.DESCRIPTION = DESCRIPTION;
         this.quantityType = quantityType;
         this.containerQuantityMap.put(containerID, quantity);
     }
 
 
     String getNAME() {
-        return this.NAME;
+        return NAME;
     }
-    String getDescription() {
-        return this.description;
+    String getDESCRIPTION() {
+        return DESCRIPTION;
     }
 
     ItemQuantityType getQuantityType() {
-        return this.quantityType;
+        return quantityType;
     }
     
     float getQuantityInContainer(String containerKey) {
@@ -54,20 +47,16 @@ public class Item{
          this.containerQuantityMap.put(containerID, quantity);
      }
     
+    void setPrice(float price) {
+        this.price = price;
+    }
+
+    float getPrice() {
+        return price;
+    }
+
     public HashMap<String, Float> getContainerQuantityMap() {
-        return this.containerQuantityMap;
-    }
-
-    public float getValue() {
-        return this.value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return containerQuantityMap;
     }
 
     

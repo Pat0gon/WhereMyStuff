@@ -28,10 +28,6 @@ public class Storage{
     public String getID() {
         return this.ID;
     }
-
-    //  private static String generateID(){
-
-    // }
     
     public HashMap<String, String> getStorageIDs() {
         return storageIDs;

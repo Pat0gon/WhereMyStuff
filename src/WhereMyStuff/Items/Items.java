@@ -5,12 +5,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Items{
-    private ItemType<?> node;
+    private ItemType node;
 
     public Items(){
-        this.node = new ItemType<>("root");
+        this.node = new ItemType("root");
     }
-
 
     void returnToRoot(){
         while(!node.getName().equals("root")){
@@ -19,7 +18,7 @@ public class Items{
     }
 
     public void addItem(Consumable item, Queue<String> itemTypes, float quantity, String containerID){
-        ArrayList<ItemType<Item>> branches = node.getItemTypes();
+        ArrayList<ItemType> branches = node.getItemTypes();
         while(!itemTypes.isEmpty()){
             if(branches.contains(new ItemType(itemTypes.peek()))){
                 for(ItemType branch : branches){

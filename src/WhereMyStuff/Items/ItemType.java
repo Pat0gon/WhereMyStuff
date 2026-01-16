@@ -6,10 +6,11 @@ import java.util.NoSuchElementException;
 
 
 
-public class ItemType<T> {
+public class ItemType {
     private String name;  
-    private ItemType<?> parent;
-    private ArrayList<T> itemTypes = new ArrayList<>();
+    private ItemType parent;
+    private ArrayList<ItemType> itemTypes = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
 
     public ItemType(String name){
         this.name = name;
@@ -26,50 +27,41 @@ public class ItemType<T> {
         this.parent = parent;
     }
 
-    public ArrayList<?> getItemTypes(){
+    public ArrayList<ItemType> getItemTypes(){
         return this.itemTypes;
     }
 
     public ArrayList<Item> getItems(){
-        ArrayList<Item> items = new ArrayList<>();
-        for (T element : itemTypes) {
-            if (element instanceof Item item) {
-                items.add(item);
-            }
-        }
-        if (items.isEmpty()) {
-            throw new NoSuchElementException("No items found in this ItemType.");
-        }
-        return items;
+        return this.items;
     }
 
 
-    public void addBranch(T itemType)throws ElementAlreadyExistsException{
+    public void addBranch(ItemType itemType)throws ElementAlreadyExistsException{
         if (itemTypes.contains(itemType)){
-                throw new ElementAlreadyExistsException("Item type already exists: " + ((ItemType<?>) itemType).getName());
+                throw new ElementAlreadyExistsException("Item type already exists: " + itemType.getName());
          }
         else{  
-            ((ItemType<?>) itemType).setParent(this);
+            itemType.setParent(this);
             itemTypes.add(itemType);
         }
       
     }
 
     public void addItem(Item item, float quantity, String containerID) throws ElementAlreadyExistsException{
-        if(itemTypes.contains(item)){
-            int index = itemTypes.indexOf(item);
-            ((Item) itemTypes.get(index)).setQuantity(containerID, ((Item) itemTypes.get(index)).getQuantityInContainer(containerID) + quantity);
+        if(items.contains(item)){
+            int index = items.indexOf(item);
+            ( items.get(index)).setQuantity(containerID, ( items.get(index)).getQuantityInContainer(containerID) + quantity);
         }
-        itemTypes.add((T)item);
+        items.add(item);
     }
     public void addItem(Unconsumable item){
-        itemTypes.add((T)item);
+        items.add(item);
         
     }
     
     public void consumeItem(String itemName, float quantity, String containerID) throws NoSuchElementException{
-        for(Item item : itemTypes){
-            if(itemitem.getNAME().equals(itemName)){
+        for(Item item : items){
+            if(item.getNAME().equals(itemName)){
                 if(item instanceof Consumable itemC){
                     if(itemC.consume(quantity,containerID)){
                         items.remove(item);
